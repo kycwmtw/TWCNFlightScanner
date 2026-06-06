@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>台陸港澳航線查詢</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="title-row">
+        <div>
+          <p class="kicker">2026 夏季班表</p>
+          <h1>台陸港澳航線</h1>
+        </div>
+        <button class="icon-button" id="overviewToggle" type="button" aria-label="資料概覽">i</button>
+      </div>
+      <label class="search-box">
+        <span>搜尋</span>
+        <input id="searchInput" type="search" placeholder="班號、城市、機場代碼" autocomplete="off">
+      </label>
+      <nav class="status-tabs" aria-label="查核狀態">
+        <button class="tab active" data-status="" type="button">全部</button>
+        <button class="tab" data-status="verified" type="button">已查核</button>
+        <button class="tab" data-status="needs_review" type="button">待複核</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="toolbar" aria-label="查詢工具列">
+        <button class="filter-button" id="filterToggle" type="button">篩選</button>
+        <label class="sort-select">
+          <span>排序</span>
+          <select id="sortSelect">
+            <option value="departure_time">起飛時間</option>
+            <option value="airline">航空公司</option>
+            <option value="route">航線</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="summary-strip" id="summaryStrip" aria-live="polite"></section>
+      <section class="results" id="results" aria-live="polite"></section>
+    </main>
+
+    <aside class="sheet" id="filterSheet" aria-hidden="true">
+      <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="filterTitle">
+        <div class="sheet-head">
+          <h2 id="filterTitle">篩選</h2>
+          <button class="plain-button" id="closeFilters" type="button">完成</button>
+        </div>
+        <div class="field-grid">
+          <label>
+            <span>航空公司</span>
+            <select id="airlineFilter"></select>
+          </label>
+          <label>
+            <span>出發機場</span>
+            <select id="departureFilter"></select>
+          </label>
+          <label>
+            <span>抵達機場</span>
+            <select id="arrivalFilter"></select>
+          </label>
+          <label>
+            <span>城市/地區</span>
+            <select id="cityFilter"></select>
+          </label>
+          <label>
+            <span>飛行日</span>
+            <select id="dayFilter"></select>
+          </label>
+        </div>
+        <button class="reset-button" id="resetFilters" type="button">清除篩選</button>
+      </div>
+    </aside>
+
+    <aside class="sheet" id="overviewSheet" aria-hidden="true">
+      <div class="sheet-panel tall" role="dialog" aria-modal="true" aria-labelledby="overviewTitle">
+        <div class="sheet-head">
+          <h2 id="overviewTitle">資料概覽</h2>
+          <button class="plain-button" id="closeOverview" type="button">關閉</button>
+        </div>
+        <div id="overviewContent" class="overview-content"></div>
+      </div>
+    </aside>
+
+    <template id="flightTemplate">
+      <article class="flight-card">
+        <button class="card-main" type="button">
+          <span class="card-top">
+            <strong class="flight-number"></strong>
+            <span class="badge"></span>
+          </span>
+          <span class="route-line">
+            <span class="airport dep"></span>
+            <span class="time dep-time"></span>
+            <span class="arrow">→</span>
+            <span class="airport arr"></span>
+            <span class="time arr-time"></span>
+          </span>
+          <span class="meta-line"></span>
+        </button>
+        <div class="card-details" hidden></div>
+      </article>
+    </template>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
