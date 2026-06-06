@@ -1,0 +1,234 @@
+{
+  "database": "tw_cn_hk_mo_routes.sqlite",
+  "total_flights": 101,
+  "airline_counts": [
+    {
+      "airline": "AE",
+      "count": 10
+    },
+    {
+      "airline": "BR",
+      "count": 20
+    },
+    {
+      "airline": "CI",
+      "count": 43
+    },
+    {
+      "airline": "FM",
+      "count": 5
+    },
+    {
+      "airline": "MU",
+      "count": 23
+    }
+  ],
+  "status_counts": [
+    {
+      "status": "verified",
+      "count": 101
+    }
+  ],
+  "source_checks": [
+    {
+      "airline": "AE",
+      "source_flight_count": 10,
+      "database_flight_count": 10,
+      "status": "ok",
+      "notes": "Count is based on extracted rows in this working dataset."
+    },
+    {
+      "airline": "B7",
+      "source_flight_count": 0,
+      "database_flight_count": 0,
+      "status": "no_qualifying_flights_found",
+      "notes": "B7 official page says UNI international schedules are covered, but no Taiwan-China/HK/Macau direct B7-operated service was found in this pass."
+    },
+    {
+      "airline": "BR",
+      "source_flight_count": 20,
+      "database_flight_count": 20,
+      "status": "ok",
+      "notes": "Count is based on extracted rows in this working dataset."
+    },
+    {
+      "airline": "CI",
+      "source_flight_count": 43,
+      "database_flight_count": 43,
+      "status": "ok",
+      "notes": "Count is based on extracted rows in this working dataset."
+    },
+    {
+      "airline": "FM",
+      "source_flight_count": 5,
+      "database_flight_count": 5,
+      "status": "ok",
+      "notes": "Count is based on extracted rows in this working dataset."
+    },
+    {
+      "airline": "MU",
+      "source_flight_count": 23,
+      "database_flight_count": 23,
+      "status": "ok",
+      "notes": "Count is based on extracted rows in this working dataset."
+    }
+  ],
+  "route_integrity_checks": [
+    {
+      "route_pair": "CAN-TPE",
+      "outbound_count": 2,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "CKG-KHH",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "FOC-TSA",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "HKG-KHH",
+      "outbound_count": 3,
+      "inbound_count": 3,
+      "status": "ok"
+    },
+    {
+      "route_pair": "HKG-TPE",
+      "outbound_count": 6,
+      "inbound_count": 12,
+      "status": "ok"
+    },
+    {
+      "route_pair": "KHH-MFM",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "KHH-NCH",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "KHH-PVG",
+      "outbound_count": 2,
+      "inbound_count": 2,
+      "status": "ok"
+    },
+    {
+      "route_pair": "KHH-SZX",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "KHH-WUX",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "KHH-XMN",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "MFM-TPE",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "NGB-TPE",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "NKG-RMQ",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "NKG-TPE",
+      "outbound_count": 2,
+      "inbound_count": 2,
+      "status": "ok"
+    },
+    {
+      "route_pair": "PEK-TPE",
+      "outbound_count": 5,
+      "inbound_count": 6,
+      "status": "ok"
+    },
+    {
+      "route_pair": "PVG-TPE",
+      "outbound_count": 7,
+      "inbound_count": 5,
+      "status": "ok"
+    },
+    {
+      "route_pair": "PVG-TSA",
+      "outbound_count": 2,
+      "inbound_count": 2,
+      "status": "ok"
+    },
+    {
+      "route_pair": "SHA-TSA",
+      "outbound_count": 3,
+      "inbound_count": 2,
+      "status": "ok"
+    },
+    {
+      "route_pair": "SZX-TPE",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "TAO-TPE",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "TFU-TPE",
+      "outbound_count": 1,
+      "inbound_count": 2,
+      "status": "ok"
+    },
+    {
+      "route_pair": "TPE-WUH",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "TPE-XMN",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "TSA-WUH",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "route_pair": "NCH-TPE",
+      "outbound_count": 1,
+      "inbound_count": 0,
+      "status": "needs_review"
+    }
+  ]
+}

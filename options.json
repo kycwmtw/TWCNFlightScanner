@@ -1,0 +1,98 @@
+{
+  "airlines": [
+    "AE",
+    "BR",
+    "CI",
+    "FM",
+    "MU"
+  ],
+  "airports": [
+    "CAN",
+    "CKG",
+    "FOC",
+    "HKG",
+    "KHH",
+    "MFM",
+    "NCH",
+    "NGB",
+    "NKG",
+    "PEK",
+    "PVG",
+    "RMQ",
+    "SHA",
+    "SZX",
+    "TAO",
+    "TFU",
+    "TPE",
+    "TSA",
+    "WUH",
+    "WUX",
+    "XMN"
+  ],
+  "cities": [
+    "Beijing Capital",
+    "Chengdu Tianfu",
+    "Chongqing",
+    "Fuzhou",
+    "Guangzhou",
+    "Hong Kong",
+    "Macau",
+    "Nanchang",
+    "Nanjing",
+    "Ningbo",
+    "Qingdao",
+    "Shanghai Hongqiao",
+    "Shanghai Pudong",
+    "Shenzhen",
+    "Wuhan",
+    "Wuxi",
+    "Xiamen"
+  ],
+  "statuses": [
+    "verified"
+  ],
+  "days": [
+    {
+      "value": "Mon",
+      "label": "週一"
+    },
+    {
+      "value": "Tue",
+      "label": "週二"
+    },
+    {
+      "value": "Wed",
+      "label": "週三"
+    },
+    {
+      "value": "Thu",
+      "label": "週四"
+    },
+    {
+      "value": "Fri",
+      "label": "週五"
+    },
+    {
+      "value": "Sat",
+      "label": "週六"
+    },
+    {
+      "value": "Sun",
+      "label": "週日"
+    }
+  ],
+  "sorts": [
+    {
+      "value": "departure_time",
+      "label": "起飛時間"
+    },
+    {
+      "value": "airline",
+      "label": "航空公司"
+    },
+    {
+      "value": "route",
+      "label": "航線"
+    }
+  ]
+}
