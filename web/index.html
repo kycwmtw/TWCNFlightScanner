@@ -2,106 +2,154 @@
 <html lang="zh-Hant">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>台陸港澳航線查詢</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0a1628">
+    <title>台陸港澳航線查詢 · 2026 夏季</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <!-- Top Bar -->
     <header class="topbar">
-      <div class="title-row">
-        <div>
-          <p class="kicker">2026 夏季班表</p>
-          <h1>台陸港澳航線</h1>
+      <div class="topbar-row">
+        <div class="brand">
+          <span class="brand-icon">✈</span>
+          <div>
+            <p class="brand-kicker">2026 夏季班表 · 3/29 – 10/24</p>
+            <h1 class="brand-title">台陸港澳航線</h1>
+          </div>
         </div>
-        <button class="icon-button" id="overviewToggle" type="button" aria-label="資料概覽">i</button>
+        <button class="circle-btn" id="overviewToggle" type="button" aria-label="資料概覽">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+        </button>
       </div>
-      <label class="search-box">
-        <span>搜尋</span>
-        <input id="searchInput" type="search" placeholder="班號、城市、機場代碼" autocomplete="off">
-      </label>
+
+      <!-- Search -->
+      <div class="search-wrap">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input id="searchInput" class="search-input" type="search" placeholder="搜尋班號、城市、機場代碼…" autocomplete="off">
+      </div>
+
+      <!-- Status Tabs -->
       <nav class="status-tabs" aria-label="查核狀態">
-        <button class="tab active" data-status="" type="button">全部</button>
-        <button class="tab" data-status="verified" type="button">已查核</button>
-        <button class="tab" data-status="needs_review" type="button">待複核</button>
+        <button class="tab active" data-status="">全部航班</button>
+        <button class="tab" data-status="verified">已查核</button>
+        <button class="tab" data-status="needs_review">待複核</button>
       </nav>
     </header>
 
     <main>
-      <section class="toolbar" aria-label="查詢工具列">
-        <button class="filter-button" id="filterToggle" type="button">篩選</button>
-        <label class="sort-select">
-          <span>排序</span>
-          <select id="sortSelect">
-            <option value="departure_time">起飛時間</option>
-            <option value="airline">航空公司</option>
-            <option value="route">航線</option>
-          </select>
-        </label>
-      </section>
+      <!-- Summary Pills -->
+      <div class="summary-row" id="summaryRow" aria-live="polite"></div>
 
-      <section class="summary-strip" id="summaryStrip" aria-live="polite"></section>
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="filter-chips" id="filterChips">
+          <button class="chip active" data-chip="all">全部</button>
+        </div>
+        <div class="toolbar-actions">
+          <button class="action-btn" id="filterBtn" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+            </svg>
+            篩選
+          </button>
+          <label class="sort-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="6" x2="16" y2="6"/>
+              <line x1="4" y1="12" x2="12" y2="12"/>
+              <line x1="4" y1="18" x2="8" y2="18"/>
+            </svg>
+            <select id="sortSelect">
+              <option value="departure_time">起飛時間</option>
+              <option value="airline">航空公司</option>
+              <option value="route">航線</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <!-- Results -->
       <section class="results" id="results" aria-live="polite"></section>
     </main>
 
+    <!-- Filter Sheet -->
     <aside class="sheet" id="filterSheet" aria-hidden="true">
       <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="filterTitle">
+        <div class="sheet-dragbar"></div>
         <div class="sheet-head">
-          <h2 id="filterTitle">篩選</h2>
-          <button class="plain-button" id="closeFilters" type="button">完成</button>
+          <h2 id="filterTitle">篩選條件</h2>
+          <button class="text-btn" id="closeFilters" type="button">完成</button>
         </div>
-        <div class="field-grid">
-          <label>
-            <span>航空公司</span>
+        <div class="filter-grid">
+          <label class="field">
+            <span class="field-label">航空公司</span>
             <select id="airlineFilter"></select>
           </label>
-          <label>
-            <span>出發機場</span>
+          <label class="field">
+            <span class="field-label">出發機場</span>
             <select id="departureFilter"></select>
           </label>
-          <label>
-            <span>抵達機場</span>
+          <label class="field">
+            <span class="field-label">抵達機場</span>
             <select id="arrivalFilter"></select>
           </label>
-          <label>
-            <span>城市/地區</span>
+          <label class="field">
+            <span class="field-label">城市 / 地區</span>
             <select id="cityFilter"></select>
           </label>
-          <label>
-            <span>飛行日</span>
+          <label class="field">
+            <span class="field-label">飛行日</span>
             <select id="dayFilter"></select>
           </label>
         </div>
-        <button class="reset-button" id="resetFilters" type="button">清除篩選</button>
+        <button class="danger-btn" id="resetFilters" type="button">清除全部篩選</button>
       </div>
     </aside>
 
+    <!-- Overview Sheet -->
     <aside class="sheet" id="overviewSheet" aria-hidden="true">
-      <div class="sheet-panel tall" role="dialog" aria-modal="true" aria-labelledby="overviewTitle">
+      <div class="sheet-panel sheet-panel--tall" role="dialog" aria-modal="true" aria-labelledby="overviewTitle">
+        <div class="sheet-dragbar"></div>
         <div class="sheet-head">
           <h2 id="overviewTitle">資料概覽</h2>
-          <button class="plain-button" id="closeOverview" type="button">關閉</button>
+          <button class="text-btn" id="closeOverview" type="button">關閉</button>
         </div>
-        <div id="overviewContent" class="overview-content"></div>
+        <div id="overviewContent" class="overview-body"></div>
       </div>
     </aside>
 
+    <!-- Flight Card Template -->
     <template id="flightTemplate">
       <article class="flight-card">
         <button class="card-main" type="button">
-          <span class="card-top">
-            <strong class="flight-number"></strong>
-            <span class="badge"></span>
-          </span>
-          <span class="route-line">
-            <span class="airport dep"></span>
-            <span class="time dep-time"></span>
-            <span class="arrow">→</span>
-            <span class="airport arr"></span>
-            <span class="time arr-time"></span>
-          </span>
-          <span class="meta-line"></span>
+          <div class="card-header">
+            <span class="flight-code"></span>
+            <span class="status-badge"></span>
+          </div>
+          <div class="route-visual">
+            <div class="route-point route-point--dep">
+              <span class="route-airport"></span>
+              <span class="route-time"></span>
+            </div>
+            <div class="route-line-visual">
+              <svg width="24" height="12" viewBox="0 0 24 12" fill="none"><path d="M0 6h18M18 1l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="route-point route-point--arr">
+              <span class="route-airport"></span>
+              <span class="route-time"></span>
+            </div>
+          </div>
+          <div class="card-meta"></div>
         </button>
-        <div class="card-details" hidden></div>
+        <div class="card-detail" hidden></div>
       </article>
     </template>
 
