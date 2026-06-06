@@ -45,6 +45,13 @@ def flightmapper_url(airline_slug, flight):
     return f"{FLIGHTMAPPER_URL}/{airline_slug}_{flight.replace(' ', '_')}"
 
 
+def eva_url(flight):
+    return flightmapper_url("EVA_Air", flight)
+
+
+BR_REVIEW_NOTE = "BR dataset is being re-audited route by route; verify against EVA official timetable before treating as complete."
+
+
 def days(raw):
     if raw == "Daily" or raw == "1234567":
         return "Mon,Tue,Wed,Thu,Fri,Sat,Sun"
@@ -142,29 +149,41 @@ routes += [
     row("AE", "AE968", "XMN", "KHH", "Xiamen", "1**4*6*", "10:05", "11:35", "32Q/738", CI_SOURCE, CI_URL),
 ]
 
-# BR: EVA's official timetable page is dynamic. Rows below were cross-checked
-# against EVA's timetable scope and public flight schedule pages for 2026 summer.
+# BR: EVA's official timetable page is dynamic. These rows are intentionally
+# marked needs_review until the full BR route set is re-audited end to end.
 routes += [
-    row("BR", "BR809", "TPE", "HKG", "Hong Kong", "12*45**", "19:00", "20:45", "321", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 809"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR851", "TPE", "HKG", "Hong Kong", "Daily", "08:15", "10:05", "321", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 851"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR857", "TPE", "HKG", "Hong Kong", "Daily", "18:10", "19:55", "333", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 857"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR867", "TPE", "HKG", "Hong Kong", "Daily", "10:05", "12:05", "789", EVA_SOURCE, "https://www.flight.info/BR867", notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR869", "TPE", "HKG", "Hong Kong", "Daily", "12:40", "14:25", "321", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 869"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR871", "TPE", "HKG", "Hong Kong", "Daily", "16:40", "18:30", "789", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 871"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR801", "TPE", "MFM", "Macau", "Daily", "10:00", "11:50", "333", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 801"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR806", "MFM", "TPE", "Macau", "Daily", "20:10", "22:05", "321", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 806"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR829", "KHH", "MFM", "Macau", "1**4**7", "09:00", "10:35", "321", EVA_SOURCE, "https://www.flight.info/BR829", notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR830", "MFM", "KHH", "Macau", "1**4**7", "11:45", "13:15", "321", EVA_SOURCE, "https://www.flight.info/BR830", notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR716", "TPE", "PEK", "Beijing Capital", "*2*4*6*", "09:10", "12:35", "333", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 716"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR716", "TPE", "PEK", "Beijing Capital", "**3***7", "15:05", "18:35", "333", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 716"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR716", "TPE", "PEK", "Beijing Capital", "1***5**", "16:05", "19:30", "333", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 716"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR715", "PEK", "TPE", "Beijing Capital", "*2*4*6*", "13:55", "17:05", "333", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 715"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR715", "PEK", "TPE", "Beijing Capital", "**3***7", "19:50", "23:00", "333", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 715"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR715", "PEK", "TPE", "Beijing Capital", "1***5**", "20:45", "23:55", "333", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 715"), notes="Added after 2026 summer schedule confirmation."),
-    row("BR", "BR708", "CAN", "TPE", "Guangzhou", "1***5*7", "13:10", "15:20", "789", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 708"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR765", "TPE", "TFU", "Chengdu Tianfu", "1***5**", "14:30", "18:05", "333", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 765"), notes="Confirmed for 2026 summer public schedule."),
-    row("BR", "BR711", "PVG", "TPE", "Shanghai Pudong", "Daily", "13:15", "15:15", "77W", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 711"), notes="Time corrected after 2026 winter-forward schedule check."),
-    row("BR", "BR721", "PVG", "TPE", "Shanghai Pudong", "Daily", "20:05", "22:00", "333", EVA_SOURCE, flightmapper_url("EVA_Air", "BR 721"), notes="Confirmed for 2026 summer public schedule."),
+    row("BR", "BR809", "TPE", "HKG", "Hong Kong", "12*45**", "19:00", "20:45", "321", EVA_SOURCE, eva_url("BR 809"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR851", "TPE", "HKG", "Hong Kong", "Daily", "08:15", "10:05", "321", EVA_SOURCE, eva_url("BR 851"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR857", "TPE", "HKG", "Hong Kong", "Daily", "18:10", "19:55", "333", EVA_SOURCE, eva_url("BR 857"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR867", "TPE", "HKG", "Hong Kong", "Daily", "10:05", "12:05", "789", EVA_SOURCE, "https://www.flight.info/BR867", "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR869", "TPE", "HKG", "Hong Kong", "Daily", "12:40", "14:25", "321", EVA_SOURCE, eva_url("BR 869"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR871", "TPE", "HKG", "Hong Kong", "Daily", "16:40", "18:30", "789", EVA_SOURCE, eva_url("BR 871"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR810", "HKG", "TPE", "Hong Kong", "12*45**", "21:45", "23:30", "321", EVA_SOURCE, eva_url("BR 810"), "needs_review", "Added during BR re-audit from HKG-TPE route schedule."),
+    row("BR", "BR852", "HKG", "TPE", "Hong Kong", "Daily", "11:05", "13:00", "321", EVA_SOURCE, eva_url("BR 852"), "needs_review", "Added during BR re-audit from HKG-TPE route schedule."),
+    row("BR", "BR858", "HKG", "TPE", "Hong Kong", "Daily", "21:10", "22:55", "333", EVA_SOURCE, eva_url("BR 858"), "needs_review", "Added during BR re-audit from HKG-TPE route schedule."),
+    row("BR", "BR868", "HKG", "TPE", "Hong Kong", "Daily", "13:30", "15:20", "321", EVA_SOURCE, eva_url("BR 868"), "needs_review", "Added during BR re-audit from HKG-TPE route schedule."),
+    row("BR", "BR870", "HKG", "TPE", "Hong Kong", "Daily", "15:25", "17:15", "321", EVA_SOURCE, eva_url("BR 870"), "needs_review", "Added during BR re-audit from HKG-TPE route schedule."),
+    row("BR", "BR872", "HKG", "TPE", "Hong Kong", "Daily", "19:40", "21:25", "789", EVA_SOURCE, eva_url("BR 872"), "needs_review", "Added during BR re-audit from HKG-TPE route schedule."),
+    row("BR", "BR892", "HKG", "TPE", "Hong Kong", "Daily", "10:10", "11:55", "781", EVA_SOURCE, eva_url("BR 892"), "needs_review", "Added during BR re-audit from HKG-TPE route schedule."),
+    row("BR", "BR801", "TPE", "MFM", "Macau", "Daily", "10:00", "11:50", "333", EVA_SOURCE, eva_url("BR 801"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR806", "MFM", "TPE", "Macau", "Daily", "20:10", "22:05", "321", EVA_SOURCE, eva_url("BR 806"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR829", "KHH", "MFM", "Macau", "1**4**7", "09:00", "10:35", "321", EVA_SOURCE, "https://www.flight.info/BR829", "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR830", "MFM", "KHH", "Macau", "1**4**7", "11:45", "13:15", "321", EVA_SOURCE, "https://www.flight.info/BR830", "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR716", "TPE", "PEK", "Beijing Capital", "*2*4*6*", "09:10", "12:35", "333", EVA_SOURCE, eva_url("BR 716"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR716", "TPE", "PEK", "Beijing Capital", "**3***7", "15:05", "18:35", "333", EVA_SOURCE, eva_url("BR 716"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR716", "TPE", "PEK", "Beijing Capital", "1***5**", "16:05", "19:30", "333", EVA_SOURCE, eva_url("BR 716"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR715", "PEK", "TPE", "Beijing Capital", "*2*4*6*", "13:55", "17:05", "333", EVA_SOURCE, eva_url("BR 715"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR715", "PEK", "TPE", "Beijing Capital", "**3***7", "19:50", "23:00", "333", EVA_SOURCE, eva_url("BR 715"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR715", "PEK", "TPE", "Beijing Capital", "1***5**", "20:45", "23:55", "333", EVA_SOURCE, eva_url("BR 715"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR707", "TPE", "CAN", "Guangzhou", "1***5*7", "10:00", "11:55", "789", EVA_SOURCE, eva_url("BR 707"), "needs_review", "Added during BR re-audit from TPE-CAN route schedule."),
+    row("BR", "BR708", "CAN", "TPE", "Guangzhou", "1***5*7", "13:10", "15:20", "789", EVA_SOURCE, eva_url("BR 708"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR765", "TPE", "TFU", "Chengdu Tianfu", "1***5**", "14:30", "18:05", "333", EVA_SOURCE, eva_url("BR 765"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR712", "TPE", "PVG", "Shanghai Pudong", "Daily", "09:55", "12:05", "77W", EVA_SOURCE, eva_url("BR 712"), "needs_review", "Added during BR re-audit from TPE-PVG route schedule."),
+    row("BR", "BR722", "TPE", "PVG", "Shanghai Pudong", "Daily", "16:30", "18:25", "333", EVA_SOURCE, eva_url("BR 722"), "needs_review", "Added during BR re-audit from TPE-PVG route schedule."),
+    row("BR", "BR752", "TPE", "PVG", "Shanghai Pudong", "****5**", "12:45", "14:40", "77W", EVA_SOURCE, eva_url("BR 752"), "needs_review", "Added during BR re-audit from TPE-PVG route schedule."),
+    row("BR", "BR711", "PVG", "TPE", "Shanghai Pudong", "Daily", "13:10", "15:05", "77W", EVA_SOURCE, eva_url("BR 711"), "needs_review", "Corrected back to 2026 summer schedule time."),
+    row("BR", "BR721", "PVG", "TPE", "Shanghai Pudong", "Daily", "20:05", "22:00", "333", EVA_SOURCE, eva_url("BR 721"), "needs_review", BR_REVIEW_NOTE),
+    row("BR", "BR751", "PVG", "TPE", "Shanghai Pudong", "****5**", "16:00", "18:00", "77W", EVA_SOURCE, eva_url("BR 751"), "needs_review", "Added during BR re-audit from PVG-TPE route schedule."),
 ]
 
 # MU / FM: directly operated rows from China Eastern Taiwan PDF pages 1-5.
@@ -199,6 +218,19 @@ routes += [
     row("MU", "MU5005", "PVG", "TPE", "Shanghai Pudong", "1**4567", "19:50", "21:40", "", MU_SOURCE, MU_URL, notes="Confirmed against China Eastern Taiwan timetable PDF."),
     row("MU", "MU2009", "NGB", "TPE", "Ningbo", "Daily", "08:40", "10:20", "", MU_SOURCE, MU_URL, notes="Confirmed against China Eastern Taiwan timetable PDF."),
 ]
+
+
+def directional_pair_counts(rows, include_airline=False):
+    pair_counts = defaultdict(lambda: [0, 0])
+    for r in rows:
+        a, b = r["departure_airport"], r["arrival_airport"]
+        pair = "-".join(sorted([a, b]))
+        key = (r["airline"], pair) if include_airline else pair
+        if a < b:
+            pair_counts[key][0] += 1
+        else:
+            pair_counts[key][1] += 1
+    return pair_counts
 
 
 def write_sqlite():
@@ -247,16 +279,23 @@ def write_sqlite():
     )
     counts = Counter(r["airline"] for r in routes)
     for airline in ["CI", "AE", "BR", "B7", "MU", "FM"]:
+        if airline == "B7":
+            status = "no_qualifying_flights_found"
+            notes = "B7 official page says UNI international schedules are covered, but no Taiwan-China/HK/Macau direct B7-operated service was found in this pass."
+        elif airline == "BR":
+            status = "needs_review"
+            notes = "BR has been expanded after missing-direction findings, but still needs a full EVA official timetable re-audit."
+        else:
+            status = "ok"
+            notes = "Count is based on extracted rows in this working dataset."
         cur.execute(
             "INSERT INTO source_checks VALUES (?,?,?,?,?)",
             (
                 airline,
                 counts.get(airline, 0),
                 counts.get(airline, 0),
-                "ok" if airline != "B7" else "no_qualifying_flights_found",
-                "B7 official page says UNI international schedules are covered, but no Taiwan-China/HK/Macau direct B7-operated service was found in this pass."
-                if airline == "B7"
-                else "Count is based on extracted rows in this working dataset.",
+                status,
+                notes,
             ),
         )
 
@@ -270,18 +309,30 @@ def write_sqlite():
         )
         """
     )
-    pair_counts = defaultdict(lambda: [0, 0])
-    for r in routes:
-        a, b = r["departure_airport"], r["arrival_airport"]
-        pair = "-".join(sorted([a, b]))
-        if a < b:
-            pair_counts[pair][0] += 1
-        else:
-            pair_counts[pair][1] += 1
+    pair_counts = directional_pair_counts(routes)
     for pair, (c1, c2) in sorted(pair_counts.items()):
         cur.execute(
             "INSERT INTO route_integrity_checks VALUES (?,?,?,?)",
             (pair, c1, c2, "ok" if c1 and c2 else "needs_review"),
+        )
+
+    cur.execute(
+        """
+        CREATE TABLE airline_route_integrity_checks (
+            airline TEXT NOT NULL,
+            route_pair TEXT NOT NULL,
+            outbound_count INTEGER,
+            inbound_count INTEGER,
+            status TEXT,
+            PRIMARY KEY (airline, route_pair)
+        )
+        """
+    )
+    airline_pair_counts = directional_pair_counts(routes, include_airline=True)
+    for (airline, pair), (c1, c2) in sorted(airline_pair_counts.items()):
+        cur.execute(
+            "INSERT INTO airline_route_integrity_checks VALUES (?,?,?,?,?)",
+            (airline, pair, c1, c2, "ok" if c1 and c2 else "needs_review"),
         )
 
     conn.commit()
@@ -333,24 +384,37 @@ def write_xlsx():
     counts = Counter(r["airline"] for r in routes)
     check_rows = []
     for airline in ["CI", "AE", "BR", "B7", "MU", "FM"]:
+        if airline == "B7":
+            status = "no_qualifying_flights_found"
+            notes = "B7 not found as actual operator in scoped direct services."
+        elif airline == "BR":
+            status = "needs_review"
+            notes = "BR expanded after missing-direction findings; full EVA official timetable re-audit still required."
+        else:
+            status = "ok"
+            notes = ""
         check_rows.append([
             airline,
             counts.get(airline, 0),
             counts.get(airline, 0),
-            "ok" if airline != "B7" else "no_qualifying_flights_found",
-            "B7 not found as actual operator in scoped direct services." if airline == "B7" else "",
+            status,
+            notes,
         ])
     add_sheet(wb, "Source Checks", ["airline", "source_flight_count", "database_flight_count", "status", "notes"], check_rows)
-    pairs = defaultdict(lambda: [0, 0])
-    for r in routes:
-        a, b = r["departure_airport"], r["arrival_airport"]
-        pair = "-".join(sorted([a, b]))
-        if a < b:
-            pairs[pair][0] += 1
-        else:
-            pairs[pair][1] += 1
+    pairs = directional_pair_counts(routes)
     integrity_rows = [[p, v[0], v[1], "ok" if v[0] and v[1] else "needs_review"] for p, v in sorted(pairs.items())]
     add_sheet(wb, "Integrity Checks", ["route_pair", "direction_a_count", "direction_b_count", "status"], integrity_rows)
+    airline_pairs = directional_pair_counts(routes, include_airline=True)
+    airline_integrity_rows = [
+        [airline, pair, v[0], v[1], "ok" if v[0] and v[1] else "needs_review"]
+        for (airline, pair), v in sorted(airline_pairs.items())
+    ]
+    add_sheet(
+        wb,
+        "Airline Integrity",
+        ["airline", "route_pair", "direction_a_count", "direction_b_count", "status"],
+        airline_integrity_rows,
+    )
     wb.save(XLSX)
 
 

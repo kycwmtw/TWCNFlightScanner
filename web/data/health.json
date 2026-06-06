@@ -1,6 +1,6 @@
 {
   "database": "tw_cn_hk_mo_routes.sqlite",
-  "total_flights": 101,
+  "total_flights": 113,
   "airline_counts": [
     {
       "airline": "AE",
@@ -8,7 +8,7 @@
     },
     {
       "airline": "BR",
-      "count": 20
+      "count": 32
     },
     {
       "airline": "CI",
@@ -25,8 +25,12 @@
   ],
   "status_counts": [
     {
+      "status": "needs_review",
+      "count": 32
+    },
+    {
       "status": "verified",
-      "count": 101
+      "count": 81
     }
   ],
   "source_checks": [
@@ -46,10 +50,10 @@
     },
     {
       "airline": "BR",
-      "source_flight_count": 20,
-      "database_flight_count": 20,
-      "status": "ok",
-      "notes": "Count is based on extracted rows in this working dataset."
+      "source_flight_count": 32,
+      "database_flight_count": 32,
+      "status": "needs_review",
+      "notes": "BR has been expanded after missing-direction findings, but still needs a full EVA official timetable re-audit."
     },
     {
       "airline": "CI",
@@ -77,7 +81,7 @@
     {
       "route_pair": "CAN-TPE",
       "outbound_count": 2,
-      "inbound_count": 1,
+      "inbound_count": 2,
       "status": "ok"
     },
     {
@@ -100,7 +104,7 @@
     },
     {
       "route_pair": "HKG-TPE",
-      "outbound_count": 6,
+      "outbound_count": 13,
       "inbound_count": 12,
       "status": "ok"
     },
@@ -172,8 +176,8 @@
     },
     {
       "route_pair": "PVG-TPE",
-      "outbound_count": 7,
-      "inbound_count": 5,
+      "outbound_count": 8,
+      "inbound_count": 8,
       "status": "ok"
     },
     {
@@ -225,6 +229,253 @@
       "status": "ok"
     },
     {
+      "route_pair": "NCH-TPE",
+      "outbound_count": 1,
+      "inbound_count": 0,
+      "status": "needs_review"
+    }
+  ],
+  "airline_route_integrity_checks": [
+    {
+      "airline": "AE",
+      "route_pair": "FOC-TSA",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "AE",
+      "route_pair": "HKG-KHH",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "AE",
+      "route_pair": "KHH-XMN",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "AE",
+      "route_pair": "TPE-XMN",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "AE",
+      "route_pair": "TSA-WUH",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "BR",
+      "route_pair": "CAN-TPE",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "BR",
+      "route_pair": "HKG-TPE",
+      "outbound_count": 7,
+      "inbound_count": 6,
+      "status": "ok"
+    },
+    {
+      "airline": "BR",
+      "route_pair": "KHH-MFM",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "BR",
+      "route_pair": "MFM-TPE",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "BR",
+      "route_pair": "PEK-TPE",
+      "outbound_count": 3,
+      "inbound_count": 3,
+      "status": "ok"
+    },
+    {
+      "airline": "BR",
+      "route_pair": "PVG-TPE",
+      "outbound_count": 3,
+      "inbound_count": 3,
+      "status": "ok"
+    },
+    {
+      "airline": "CI",
+      "route_pair": "CAN-TPE",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "CI",
+      "route_pair": "CKG-KHH",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "CI",
+      "route_pair": "HKG-KHH",
+      "outbound_count": 2,
+      "inbound_count": 2,
+      "status": "ok"
+    },
+    {
+      "airline": "CI",
+      "route_pair": "HKG-TPE",
+      "outbound_count": 6,
+      "inbound_count": 6,
+      "status": "ok"
+    },
+    {
+      "airline": "CI",
+      "route_pair": "KHH-PVG",
+      "outbound_count": 2,
+      "inbound_count": 2,
+      "status": "ok"
+    },
+    {
+      "airline": "CI",
+      "route_pair": "KHH-SZX",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "CI",
+      "route_pair": "PEK-TPE",
+      "outbound_count": 2,
+      "inbound_count": 3,
+      "status": "ok"
+    },
+    {
+      "airline": "CI",
+      "route_pair": "PVG-TPE",
+      "outbound_count": 3,
+      "inbound_count": 3,
+      "status": "ok"
+    },
+    {
+      "airline": "CI",
+      "route_pair": "SHA-TSA",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "CI",
+      "route_pair": "SZX-TPE",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "CI",
+      "route_pair": "TFU-TPE",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "FM",
+      "route_pair": "PVG-TSA",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "FM",
+      "route_pair": "SHA-TSA",
+      "outbound_count": 2,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "MU",
+      "route_pair": "KHH-NCH",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "MU",
+      "route_pair": "KHH-WUX",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "MU",
+      "route_pair": "NGB-TPE",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "MU",
+      "route_pair": "NKG-RMQ",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "MU",
+      "route_pair": "NKG-TPE",
+      "outbound_count": 2,
+      "inbound_count": 2,
+      "status": "ok"
+    },
+    {
+      "airline": "MU",
+      "route_pair": "PVG-TPE",
+      "outbound_count": 2,
+      "inbound_count": 2,
+      "status": "ok"
+    },
+    {
+      "airline": "MU",
+      "route_pair": "PVG-TSA",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "MU",
+      "route_pair": "TAO-TPE",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "MU",
+      "route_pair": "TPE-WUH",
+      "outbound_count": 1,
+      "inbound_count": 1,
+      "status": "ok"
+    },
+    {
+      "airline": "BR",
+      "route_pair": "TFU-TPE",
+      "outbound_count": 0,
+      "inbound_count": 1,
+      "status": "needs_review"
+    },
+    {
+      "airline": "MU",
       "route_pair": "NCH-TPE",
       "outbound_count": 1,
       "inbound_count": 0,

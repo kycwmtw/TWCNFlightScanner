@@ -112,6 +112,14 @@ def build_health(conn):
             """
         ).fetchall()
     )
+    airline_route_integrity = rows_to_dicts(
+        conn.execute(
+            """
+            SELECT * FROM airline_route_integrity_checks
+            ORDER BY status DESC, airline, route_pair
+            """
+        ).fetchall()
+    )
     return {
         "database": DB_PATH.name,
         "total_flights": total,
@@ -119,6 +127,7 @@ def build_health(conn):
         "status_counts": status_counts,
         "source_checks": source_checks,
         "route_integrity_checks": route_integrity,
+        "airline_route_integrity_checks": airline_route_integrity,
     }
 
 

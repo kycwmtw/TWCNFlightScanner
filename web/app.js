@@ -237,6 +237,7 @@ async function loadOverview() {
   dom.overviewContent.innerHTML = '<div class="state-msg"><span class="state-msg-icon">⏳</span>讀取中…</div>';
   const h = await fetchWithFallback("/api/health", "data/health.json");
   const issues = h.route_integrity_checks.filter(r => r.status !== "ok");
+  const airlineIssues = (h.airline_route_integrity_checks || []).filter(r => r.status !== "ok");
 
   dom.overviewContent.innerHTML = `
     <div class="overview-card">
@@ -262,6 +263,16 @@ async function loadOverview() {
       <h3>航線完整性</h3>
       <dl class="stat-list">
         ${issues.length ? issues.map(r => statRow(r.route_pair, "⚠ 待確認")).join("") : statRow("所有航線對", "✓ 雙向完整")}
+      </dl>
+    </div>
+    <div class="overview-card${airlineIssues.length ? " overview-card--warn" : ""}">
+      <h3>航空公司完整性</h3>
+      <dl class="stat-list">
+        ${
+          airlineIssues.length
+            ? airlineIssues.map(r => statRow(`${r.airline} ${r.route_pair}`, "⚠ 待確認")).join("")
+            : statRow("所有航空公司航線對", "✓ 雙向完整")
+        }
       </dl>
     </div>`;
 }

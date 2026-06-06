@@ -20,13 +20,13 @@ https://github.com/kycwmtw/TWCNFlightScanner
 
 本機 `main` 已與 `origin/main` 同步。
 
-最新 commit：
+目前基準 commit：
 
 ```text
 75e5888 Verify BR MU FM flight schedules
 ```
 
-這個 commit 已成功推上 GitHub。
+這個 commit 已成功推上 GitHub。此報告建立後又進行了 BR 資料修正，本機目前有尚未 commit 的後續改動。
 
 ## 3. 目前資料狀態
 
@@ -39,14 +39,14 @@ tw_cn_hk_mo_routes.sqlite
 目前總航班筆數：
 
 ```text
-101
+113
 ```
 
 航空公司分布：
 
 ```text
 AE  10
-BR  20
+BR  32
 CI  43
 FM   5
 MU  23
@@ -55,11 +55,11 @@ MU  23
 查核狀態：
 
 ```text
-verified      101
-needs_review    0
+verified       81
+needs_review   32
 ```
 
-目前仍有一個「航線完整性」提醒：
+目前仍有一個整體「航線完整性」提醒：
 
 ```text
 NCH-TPE
@@ -67,22 +67,34 @@ NCH-TPE
 
 原因：資料中有 `MU2047 NCH-TPE`，但目前沒有相反方向 `TPE-NCH`。這不是單筆航班待複核，而是資料庫自動檢查航線雙向完整性的提醒。
 
+目前另有「航空公司層級完整性」提醒：
+
+```text
+BR TFU-TPE
+MU NCH-TPE
+```
+
+這個檢查比整體航線完整性更嚴格，會確認同一家航空公司是否具備雙向資料。這是本輪新增的檢查，目的是避免 CI 的回程航班掩蓋 BR 自己缺回程的問題。
+
 ## 4. 資料來源與查核狀態
 
 目前資料來源包括：
 
 - 華航 2026 夏季班表 PDF：CI / AE
-- 長榮官方時刻表頁面，加 FlightMapper / Flight.info 交叉查核：BR
+- 長榮官方時刻表頁面，加 FlightMapper / Flight.info 交叉查核：BR；目前 BR 整組仍標為 `needs_review`，不可宣稱已找齊。
 - 東航台灣官方班表 PDF，加公開班表頁交叉查核：MU / FM
 
 最近一次重要資料更新：
 
-- BR 原本 19 筆，更新後 20 筆。
-- 補上 `BR715 PEK-TPE 週一/週五 20:45-23:55`。
-- 修正 `BR711 PVG-TPE` 為 `13:15-15:15`。
+- BR 原本 20 筆，本輪補到 32 筆，但仍需逐航線重查。
+- 補上 HKG-TPE 回程：`BR810`、`BR852`、`BR858`、`BR868`、`BR870`、`BR872`、`BR892`。
+- 補上 TPE-PVG：`BR712`、`BR722`、`BR752`。
+- 補上 PVG-TPE：`BR751`。
+- 補上 TPE-CAN：`BR707`。
+- `BR711 PVG-TPE` 修回 2026 夏季班表 `13:10-15:05`。
 - 修正 `BR830 MFM-KHH` 為 `11:45-13:15`。
 - 修正 `BR867` 機型為 `789`。
-- MU / FM 原本標為 `needs_review`，已根據來源改為 `verified`。
+- BR 全部 32 筆目前標為 `needs_review`，補完並回查 EVA 官方前不要改成 `verified`。
 
 ## 5. 專案檔案結構
 
@@ -138,7 +150,7 @@ GitHub Pages 自動部署：
 - 航班以卡片呈現。
 - 點擊航班卡片可展開詳細資料。
 - 詳細資料包含有效日期、機型、原始飛行日、資料來源、來源連結、備註。
-- 資料概覽抽屜可顯示總筆數、航空公司分布、查核狀態、航線完整性。
+- 資料概覽抽屜可顯示總筆數、航空公司分布、查核狀態、整體航線完整性、航空公司層級完整性。
 - 支援兩種資料模式：
   - 本機 API：`server.py` 讀 SQLite。
   - GitHub Pages 靜態模式：讀 `web/data/*.json`。
@@ -189,6 +201,16 @@ source
 source_url
 verification_status
 notes
+```
+
+`health.json` 目前包含：
+
+```text
+airline_counts
+status_counts
+source_checks
+route_integrity_checks
+airline_route_integrity_checks
 ```
 
 ## 8. 發布流程
@@ -277,20 +299,21 @@ web/app.js
 
 ## 11. README 注意事項
 
-目前 `README.md` 的 Build Status 仍可能保留舊狀態，提到 100 筆航班與 47 筆 needs_review。這已經不是最新資料。
+`README.md` 的 Build Status 已更新為 2026-06-07 狀態。若後續 DeepSeek 繼續補資料，請同步更新 README 與本報告。
 
 最新狀態應為：
 
 ```text
-總航班 101 筆
-verified 101 筆
-needs_review 0 筆
+總航班 113 筆
+verified 81 筆
+needs_review 32 筆
+BR 32 筆全數暫列 needs_review
 ```
 
 建議接手時順便更新 README，避免公開文件與網站資料不一致。
 
 ## 12. 給接手者的簡短結論
 
-這個專案的資料底層已可用，GitHub Pages 也已經能部署。下一階段重點不是資料庫，而是把目前陽春的手機查詢頁改成真正好看、好用、清楚可信的航班查詢工具。
+這個專案的資料底層與 GitHub Pages 部署流程已可用，但 BR 資料仍需重新盤點。下一階段應同時處理兩件事：先完成 BR 航線資料查核，再把手機查詢頁改成真正好看、好用、清楚可信的航班查詢工具。
 
 請優先改 `web/` 前端，不要破壞 `web/data/*.json` 的資料讀取合約。
