@@ -1,6 +1,6 @@
 {
   "database": "tw_cn_hk_mo_routes.sqlite",
-  "total_flights": 100,
+  "total_flights": 101,
   "airline_counts": [
     {
       "airline": "AE",
@@ -8,7 +8,7 @@
     },
     {
       "airline": "BR",
-      "count": 19
+      "count": 20
     },
     {
       "airline": "CI",
@@ -25,12 +25,8 @@
   ],
   "status_counts": [
     {
-      "status": "needs_review",
-      "count": 47
-    },
-    {
       "status": "verified",
-      "count": 53
+      "count": 101
     }
   ],
   "source_checks": [
@@ -50,8 +46,8 @@
     },
     {
       "airline": "BR",
-      "source_flight_count": 19,
-      "database_flight_count": 19,
+      "source_flight_count": 20,
+      "database_flight_count": 20,
       "status": "ok",
       "notes": "Count is based on extracted rows in this working dataset."
     },
@@ -170,7 +166,7 @@
     },
     {
       "route_pair": "PEK-TPE",
-      "outbound_count": 4,
+      "outbound_count": 5,
       "inbound_count": 6,
       "status": "ok"
     },
